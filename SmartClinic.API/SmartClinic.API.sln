@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37502.11 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartClinic.API", "SmartClinic.API.csproj", "{13D82737-B71B-4163-98A6-B38CA0BBDF51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartClinic.Domain", "..\SmartClinic.Domain\SmartClinic.Domain.csproj", "{25D8CAE9-798F-4C64-A12C-0B50FCF169DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartClinic.Application", "..\SmartClinic.Application\SmartClinic.Application.csproj", "{8F048DDD-C897-4CC8-B09F-487E1337EC36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartClinic.Infrastructure", "..\SmartClinic.Infrastructure\SmartClinic.Infrastructure.csproj", "{0F67E332-666E-474D-8670-F8A083D02EC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartClinic.Persistence", "..\SmartClinic.Persistence\SmartClinic.Persistence.csproj", "{0E09FC4A-FB19-412E-959F-8337F2DC700D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartClinic.Shared", "..\SmartClinic.Shared\SmartClinic.Shared.csproj", "{9CC02CAB-513A-481F-A82C-F0032CF17279}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13D82737-B71B-4163-98A6-B38CA0BBDF51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13D82737-B71B-4163-98A6-B38CA0BBDF51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13D82737-B71B-4163-98A6-B38CA0BBDF51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13D82737-B71B-4163-98A6-B38CA0BBDF51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25D8CAE9-798F-4C64-A12C-0B50FCF169DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25D8CAE9-798F-4C64-A12C-0B50FCF169DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25D8CAE9-798F-4C64-A12C-0B50FCF169DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25D8CAE9-798F-4C64-A12C-0B50FCF169DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F048DDD-C897-4CC8-B09F-487E1337EC36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F048DDD-C897-4CC8-B09F-487E1337EC36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F048DDD-C897-4CC8-B09F-487E1337EC36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F048DDD-C897-4CC8-B09F-487E1337EC36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F67E332-666E-474D-8670-F8A083D02EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F67E332-666E-474D-8670-F8A083D02EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F67E332-666E-474D-8670-F8A083D02EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F67E332-666E-474D-8670-F8A083D02EC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E09FC4A-FB19-412E-959F-8337F2DC700D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E09FC4A-FB19-412E-959F-8337F2DC700D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E09FC4A-FB19-412E-959F-8337F2DC700D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E09FC4A-FB19-412E-959F-8337F2DC700D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC02CAB-513A-481F-A82C-F0032CF17279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC02CAB-513A-481F-A82C-F0032CF17279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC02CAB-513A-481F-A82C-F0032CF17279}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC02CAB-513A-481F-A82C-F0032CF17279}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBAC0AA4-1131-4F39-AAB9-410B5072DEE2}
+	EndGlobalSection
+EndGlobal
