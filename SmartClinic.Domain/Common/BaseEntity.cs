@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.Domain.Common
 {
-    internal class BaseEntity
+    public abstract class BaseEntity
     {
+        public Guid Id { get; set; }
     }
 }

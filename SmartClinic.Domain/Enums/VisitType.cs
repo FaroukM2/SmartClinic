@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.Domain.Enums
 {
-    internal class VisitType
+    public enum VisitType
     {
+        NewVisit = 1,
+        FollowUp = 2
     }
 }

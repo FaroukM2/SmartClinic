@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.Domain.Enums
 {
-    internal class PaymentStatus
+    public enum PaymentStatus
     {
+        Pending = 1,
+        Paid = 2,
+        PartiallyPaid = 3
     }
 }

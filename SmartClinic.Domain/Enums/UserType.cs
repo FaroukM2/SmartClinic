@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.Domain.Enums
 {
-    internal class UserType
+    public enum UserType
     {
+        PlatformAdmin = 1,
+        ClinicAdmin = 2,
+        Doctor = 3,
+        Receptionist = 4
     }
 }

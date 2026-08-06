@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.Domain.Enums
 {
-    internal class PaymentMethod
+    public enum PaymentMethod
     {
+        Cash = 1,
+        Card = 2,
+        Insurance = 3
     }
 }

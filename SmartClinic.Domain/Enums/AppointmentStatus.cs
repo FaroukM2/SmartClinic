@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.Domain.Enums
 {
-    internal class AppointmentStatus
+    public enum AppointmentStatus
     {
+        Reserved = 1,
+        Waiting = 2,
+        InConsultation = 3,
+        Completed = 4,
+        Cancelled = 5,
+        NoShow = 6
     }
 }
