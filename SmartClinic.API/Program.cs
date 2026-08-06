@@ -1,34 +1,73 @@
+using System.Reflection;
+using SmartClinic.Application;
+using SmartClinic.Infrastructure.Extensions;
+using SmartClinic.Persistence.Extensions;
+using SmartClinic.Persistence.Seed;
 
-namespace SmartClinic.API
+namespace SmartClinic.API;
+
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static void Main(string[] args)
+        try
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
+            // Register services
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddApplication();
+            builder.Services.AddPersistence(builder.Configuration);
+            builder.Services.AddInfrastructure(builder.Configuration);
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configure middleware
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 
+            // Seed initial data
+            await DbInitializer.SeedAsync(app.Services);
+
             app.Run();
+        }
+        catch (Exception ex)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine("========== APPLICATION ERROR ==========");
+            Console.WriteLine(ex);
+
+            if (ex is ReflectionTypeLoadException reflectionException)
+            {
+                Console.WriteLine();
+                Console.WriteLine("========== LOADER EXCEPTIONS ==========");
+
+                foreach (var loaderException in reflectionException.LoaderExceptions)
+                {
+                    Console.WriteLine(loaderException?.ToString());
+                    Console.WriteLine("----------------------------------------");
+                }
+            }
+
+            Console.ResetColor();
+
+            Console.WriteLine();
+            Console.WriteLine("Press Enter to exit...");
+            Console.ReadLine();
         }
     }
 }
