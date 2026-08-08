@@ -1,8 +1,10 @@
-using System.Reflection;
+using Microsoft.OpenApi.Models;
+using SmartClinic.API.Middlewares;
 using SmartClinic.Application;
 using SmartClinic.Infrastructure.Extensions;
 using SmartClinic.Persistence.Extensions;
 using SmartClinic.Persistence.Seed;
+using System.Reflection;
 
 namespace SmartClinic.API;
 
@@ -17,7 +19,45 @@ public class Program
             // Register services
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "SmartClinic API", Version = "v1" });
+
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' [space] and then your valid JWT token."
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+            });
 
             builder.Services.AddApplication();
             builder.Services.AddPersistence(builder.Configuration);
@@ -25,7 +65,11 @@ public class Program
 
             var app = builder.Build();
 
-            // Configure middleware
+            // Configure middleware pipeline
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+            app.UseCors("AllowAll");
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

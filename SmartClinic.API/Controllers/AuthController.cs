@@ -1,6 +1,8 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SmartClinic.Application.Features.Authentication.Commands.Login;
+using SmartClinic.Application.Features.Authentication.Commands.Register;
+using System.Threading.Tasks;
 
 namespace SmartClinic.API.Controllers;
 
@@ -19,7 +21,13 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginCommand command)
     {
         var result = await _mediator.Send(command);
+        return Ok(result);
+    }
 
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
+    {
+        var result = await _mediator.Send(command);
         return Ok(result);
     }
 }

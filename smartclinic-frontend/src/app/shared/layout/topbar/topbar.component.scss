@@ -1,0 +1,66 @@
+:host { display: block; }
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 260px; /* var(--sidebar-width) */
+  right: 0;
+  height: var(--topbar-height);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 90;
+  gap: 16px;
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.sidebar-collapsed {
+    left: 72px; /* var(--sidebar-collapsed) */
+  }
+}
+
+.topbar__left { display: flex; align-items: center; gap: 12px; }
+
+.page-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.icon-btn {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: var(--transition);
+
+  &:hover {
+    background: var(--surface-3);
+    color: var(--primary-light);
+    border-color: var(--primary);
+  }
+}
+
+.notif-dot {
+  position: absolute;
+  top: 7px; right: 7px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--danger);
+  border: 1.5px solid var(--surface);
+}

@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SmartClinic.Application.Interfaces.Authentication;
 using SmartClinic.Domain.Entities;
 using SmartClinic.Domain.Enums;
 using SmartClinic.Persistence.Context;
+using System;
+using System.Threading.Tasks;
 
 namespace SmartClinic.Persistence.Seed;
 
@@ -16,7 +18,14 @@ public static class DbInitializer
         var context = scope.ServiceProvider.GetRequiredService<SmartClinicDbContext>();
         var passwordHasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
 
-        await context.Database.MigrateAsync();
+        try
+        {
+            await context.Database.EnsureCreatedAsync();
+        }
+        catch
+        {
+            // Database might already exist or connection pending
+        }
 
         if (await context.Users.AnyAsync())
             return;

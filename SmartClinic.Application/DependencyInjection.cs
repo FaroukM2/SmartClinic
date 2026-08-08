@@ -1,11 +1,8 @@
-﻿using FluentValidation;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SmartClinic.Application.Behaviors;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartClinic.Application
 {
@@ -17,9 +14,11 @@ namespace SmartClinic.Application
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             });
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(cfg => cfg.AddMaps(Assembly.GetExecutingAssembly()));
 
             return services;
         }
