@@ -1,6 +1,6 @@
 # 🏥 SmartClinic
 
-> Enterprise Multi-Tenant Smart Clinic Management System built with ASP.NET Core 8 and Clean Architecture.
+> Enterprise Multi-Tenant Smart Clinic Management System built with ASP.NET Core 9 and Clean Architecture.
 
 ![.NET](https://img.shields.io/badge/.NET-8-512BD4?style=for-the-badge&logo=dotnet)
 ![C#](https://img.shields.io/badge/C%23-12-239120?style=for-the-badge&logo=csharp)
