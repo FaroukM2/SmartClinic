@@ -1,74 +1,85 @@
-# 🏥 SmartClinic
+# SmartClinic
 
-### Enterprise Multi-Tenant Healthcare Management Platform
+### Multi-Tenant Healthcare Management Platform
 
-[![.NET 9](https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
-[![ASP.NET Core 9](https://img.shields.io/badge/ASP.NET%20Core-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/apps/aspnet)
-[![Angular](https://img.shields.io/badge/Angular-TypeScript-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev/)
-[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)](https://www.microsoft.com/sql-server)
-[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean-0078D4?style=for-the-badge)]()
-[![CQRS](https://img.shields.io/badge/Pattern-CQRS-6A1B9A?style=for-the-badge)]()
+<p align="center">
 
-> A scalable healthcare management platform built to centralize clinic operations across multiple tenants, branches, healthcare professionals, and patients.
+A scalable clinic management platform built with modern .NET architecture principles.
+
+</p>
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=dotnet&logoColor=white" />
+<img src="https://img.shields.io/badge/ASP.NET%20Core-9.0-512BD4?style=flat-square&logo=dotnet&logoColor=white" />
+<img src="https://img.shields.io/badge/Angular-TypeScript-DD0031?style=flat-square&logo=angular&logoColor=white" />
+<img src="https://img.shields.io/badge/SQL%20Server-Database-CC2927?style=flat-square&logo=microsoftsqlserver&logoColor=white" />
+<img src="https://img.shields.io/badge/Architecture-Clean%20Architecture-0078D4?style=flat-square" />
+<img src="https://img.shields.io/badge/Pattern-CQRS-6A1B9A?style=flat-square" />
+
+</p>
 
 ---
 
-## Overview
+## About
 
-**SmartClinic** is a multi-tenant healthcare management platform built with **ASP.NET Core 9** and designed around modern enterprise software architecture principles.
+SmartClinic is a multi-tenant healthcare management platform designed to centralize and simplify clinic operations.
 
-The platform provides a unified workflow for managing:
+The platform provides a unified workflow for managing clinics, branches, doctors, patients, appointments, visits, prescriptions, payments, and access control.
 
-- 🏢 Clinics & Branches
-- 👨‍⚕️ Doctors & Specializations
-- 🧑‍🤝‍🧑 Patients & Medical Records
-- 📅 Appointments & Visits
-- 💊 Prescriptions
-- 💳 Payments
-- 🔐 Authentication & Authorization
+The system is designed with a strong focus on **maintainability, scalability, security, and separation of concerns**.
 
-The system is designed with a strong focus on:
+---
 
-**Scalability · Maintainability · Security · Testability · Separation of Concerns**
+## Key Capabilities
+
+| Area | Capabilities |
+| --- | --- |
+| Identity | Registration, Login, JWT, Refresh Tokens, Roles |
+| Clinics | Multi-Tenant Clinics, Branches, Specializations |
+| Doctors | Profiles, Specializations, Branches, Schedules |
+| Patients | Profiles, Medical History, Visits |
+| Appointments | Scheduling, Status Management |
+| Clinical | Visits, Prescriptions, Prescription Items |
+| Finance | Payments, Payment Methods, Payment Status |
+| Management | Dashboard & Clinic Statistics |
 
 ---
 
 ## Architecture
 
-SmartClinic follows **Clean Architecture**, keeping business logic independent from frameworks, databases, and external infrastructure.
+SmartClinic follows **Clean Architecture**, keeping the core domain independent from frameworks, infrastructure, and external concerns.
 
 ```text
                          ┌─────────────────────┐
-                         │   SmartClinic API   │
-                         │   Presentation      │
+                         │    SmartClinic API  │
+                         │    Presentation     │
                          └──────────┬──────────┘
                                     │
                                     ▼
                          ┌─────────────────────┐
                          │    Application      │
-                         │  CQRS • MediatR     │
-                         │ Commands • Queries  │
+                         │  CQRS + MediatR     │
+                         │ Commands / Queries  │
                          └──────────┬──────────┘
                                     │
                                     ▼
                          ┌─────────────────────┐
                          │       Domain        │
-                         │ Entities • Enums    │
+                         │ Entities / Enums    │
                          │ Business Concepts   │
-                         └─────────────────────┘
-
-                  ┌─────────────────┴─────────────────┐
-                  │                                   │
-                  ▼                                   ▼
-        ┌──────────────────┐                ┌──────────────────┐
-        │  Infrastructure  │                │   Persistence    │
-        │                  │                │                  │
-        │ JWT / Security   │                │ EF Core          │
-        │ External Services│                │ Repositories     │
-        └──────────────────┘                │ Migrations       │
-                                            └────────┬─────────┘
-                                                     │
-                                                     ▼
-                                              ┌─────────────┐
-                                              │ SQL Server  │
-                                              └─────────────┘
+                         └──────────┬──────────┘
+                                    │
+                       ┌────────────┴────────────┐
+                       │                         │
+                       ▼                         ▼
+              ┌─────────────────┐      ┌─────────────────┐
+              │  Infrastructure │      │   Persistence   │
+              │ Authentication  │      │ EF Core / SQL   │
+              │ JWT / Security  │      │ Repositories    │
+              └─────────────────┘      └────────┬────────┘
+                                                │
+                                                ▼
+                                         ┌──────────────┐
+                                         │ SQL Server   │
+                                         └──────────────┘
