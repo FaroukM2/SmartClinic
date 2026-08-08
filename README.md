@@ -1,199 +1,74 @@
 # 🏥 SmartClinic
 
-## Enterprise Multi-Tenant Clinic Management System
+### Enterprise Multi-Tenant Healthcare Management Platform
 
-![.NET 9](https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![ASP.NET Core 9](https://img.shields.io/badge/ASP.NET%20Core-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-TypeScript-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
-![Clean Architecture](https://img.shields.io/badge/Architecture-Clean%20Architecture-blue?style=for-the-badge)
-![CQRS](https://img.shields.io/badge/Pattern-CQRS-orange?style=for-the-badge)
+[![.NET 9](https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
+[![ASP.NET Core 9](https://img.shields.io/badge/ASP.NET%20Core-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/apps/aspnet)
+[![Angular](https://img.shields.io/badge/Angular-TypeScript-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev/)
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)](https://www.microsoft.com/sql-server)
+[![Clean Architecture](https://img.shields.io/badge/Architecture-Clean-0078D4?style=for-the-badge)]()
+[![CQRS](https://img.shields.io/badge/Pattern-CQRS-6A1B9A?style=for-the-badge)]()
 
-SmartClinic is a modern multi-tenant clinic management system designed to manage the complete healthcare workflow across clinics, branches, doctors, patients, appointments, visits, prescriptions, payments, and user management.
-
-The project is built with **ASP.NET Core 9**, **Clean Architecture**, **CQRS**, and **MediatR**, with a strong focus on maintainability, scalability, security, and separation of concerns.
+> A scalable healthcare management platform built to centralize clinic operations across multiple tenants, branches, healthcare professionals, and patients.
 
 ---
 
-## 📌 Overview
+## Overview
 
-SmartClinic is designed to provide a centralized platform for managing modern clinic operations while supporting multiple clinics and branches within the same system.
+**SmartClinic** is a multi-tenant healthcare management platform built with **ASP.NET Core 9** and designed around modern enterprise software architecture principles.
 
-The system follows a modular architecture that separates business logic from infrastructure and presentation concerns, making the application easier to maintain, extend, and test.
+The platform provides a unified workflow for managing:
 
-### Main Objectives
+- 🏢 Clinics & Branches
+- 👨‍⚕️ Doctors & Specializations
+- 🧑‍🤝‍🧑 Patients & Medical Records
+- 📅 Appointments & Visits
+- 💊 Prescriptions
+- 💳 Payments
+- 🔐 Authentication & Authorization
 
-- Support multiple clinics and branches.
-- Manage doctors and their schedules.
-- Manage patients and medical records.
-- Manage appointments and visits.
-- Handle prescriptions and payments.
-- Provide secure authentication and authorization.
-- Maintain clear separation of concerns.
-- Provide a scalable foundation for future development.
+The system is designed with a strong focus on:
 
----
-
-# ✨ Core Features
-
-## 🔐 Authentication & Authorization
-
-- User Registration
-- User Login
-- JWT Bearer Authentication
-- Refresh Token Management
-- Secure Password Hashing
-- Role-Based Access Control
-- User Types
-- Authentication Validation
-- Last Login Tracking
-
-## 🏢 Clinic Management
-
-- Multi-Tenant Clinic Structure
-- Clinic Information
-- Clinic Users
-- Clinic Roles
-- Clinic Branches
-- Clinic Patients
-- Clinic Specializations
-
-## 🏬 Branch Management
-
-- Branch Management
-- Clinic-Based Branches
-- Doctor-to-Branch Relationships
-- Branch Information
-
-## 👨‍⚕️ Doctor Management
-
-- Doctor Profiles
-- Doctor Specializations
-- Doctor Branch Assignment
-- Doctor Schedules
-- Doctor Availability
-
-## 🧑‍🤝‍🧑 Patient Management
-
-- Patient Profiles
-- Patient Registration
-- Patient Information
-- Medical History
-- Patient Visits
-
-## 📅 Appointment Management
-
-- Appointment Creation
-- Appointment Management
-- Appointment Status
-- Doctor-Based Appointments
-- Patient-Based Appointments
-
-## 🩺 Visit Management
-
-- Patient Visits
-- Visit Information
-- Visit Types
-- Visit Tracking
-
-## 💊 Prescription Management
-
-- Prescription Creation
-- Prescription Items
-- Visit-Based Prescriptions
-- Prescription Management
-
-## 💳 Payment Management
-
-- Payment Records
-- Payment Methods
-- Payment Status
-- Visit-Based Payments
-
-## 📊 Dashboard
-
-- Dashboard Statistics
-- Clinic Statistics
-- Operational Metrics
+**Scalability · Maintainability · Security · Testability · Separation of Concerns**
 
 ---
 
-# 🛠️ Technology Stack
+## Architecture
 
-## Backend
-
-- **C#**
-- **.NET 9**
-- **ASP.NET Core Web API**
-- **Entity Framework Core**
-- **SQL Server**
-- **MediatR**
-- **CQRS**
-- **FluentValidation**
-- **JWT Bearer Authentication**
-- **Refresh Tokens**
-
-## Architecture & Design
-
-- Clean Architecture
-- Domain-Driven Design Principles
-- CQRS
-- Repository Pattern
-- Unit of Work
-- Dependency Injection
-- SOLID Principles
-- Separation of Concerns
-- Dependency Inversion
-
-## Frontend
-
-- **Angular**
-- **TypeScript**
-- Angular Router
-- HTTP Interceptors
-- Route Guards
-- Feature-Based Architecture
-
-## Development Tools
-
-- Swagger / OpenAPI
-- Entity Framework Core Migrations
-- SQL Server
-- Visual Studio
-- Git
-- GitHub
-
----
-
-# 🏛️ Architecture
-
-SmartClinic follows **Clean Architecture** principles.
+SmartClinic follows **Clean Architecture**, keeping business logic independent from frameworks, databases, and external infrastructure.
 
 ```text
-                         ┌──────────────────────┐
-                         │     SmartClinic      │
-                         └──────────┬───────────┘
+                         ┌─────────────────────┐
+                         │   SmartClinic API   │
+                         │   Presentation      │
+                         └──────────┬──────────┘
                                     │
-              ┌─────────────────────┼─────────────────────┐
-              │                     │                     │
-              ▼                     ▼                     ▼
-       ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
-       │     API      │      │ Application  │      │    Domain    │
-       └──────┬───────┘      └──────┬───────┘      └──────────────┘
-              │                     │
-              └─────────────┬───────┘
-                            │
-                            ▼
-                   ┌─────────────────┐
-                   │ Infrastructure  │
-                   └────────┬────────┘
-                            │
-                            ▼
-                   ┌─────────────────┐
-                   │   Persistence   │
-                   └────────┬────────┘
-                            │
-                            ▼
-                     ┌────────────┐
-                     │ SQL Server │
-                     └────────────┘
+                                    ▼
+                         ┌─────────────────────┐
+                         │    Application      │
+                         │  CQRS • MediatR     │
+                         │ Commands • Queries  │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │       Domain        │
+                         │ Entities • Enums    │
+                         │ Business Concepts   │
+                         └─────────────────────┘
+
+                  ┌─────────────────┴─────────────────┐
+                  │                                   │
+                  ▼                                   ▼
+        ┌──────────────────┐                ┌──────────────────┐
+        │  Infrastructure  │                │   Persistence    │
+        │                  │                │                  │
+        │ JWT / Security   │                │ EF Core          │
+        │ External Services│                │ Repositories     │
+        └──────────────────┘                │ Migrations       │
+                                            └────────┬─────────┘
+                                                     │
+                                                     ▼
+                                              ┌─────────────┐
+                                              │ SQL Server  │
+                                              └─────────────┘
