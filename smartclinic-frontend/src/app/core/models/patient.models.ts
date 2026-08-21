@@ -36,7 +36,7 @@ export interface MedicalHistory {
   notes?: string;
 }
 
-export const GenderLabels: Record<number, string> = { 0: 'Male', 1: 'Female' };
+export const GenderLabels: Record<number, string> = { 1: 'Male', 2: 'Female' };
 export const BloodTypeLabels: Record<number, string> = {
-  0: 'A+', 1: 'A-', 2: 'B+', 3: 'B-', 4: 'AB+', 5: 'AB-', 6: 'O+', 7: 'O-'
+  1: 'A+', 2: 'A-', 3: 'B+', 4: 'B-', 5: 'AB+', 6: 'AB-', 7: 'O+', 8: 'O-'
 };

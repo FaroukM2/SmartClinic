@@ -12,5 +12,6 @@ namespace SmartClinic.Application.Interfaces.Persistence
         Task UpdateVisitAsync(Visit visit, CancellationToken cancellationToken = default);
         Task<Visit?> GetVisitByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<Visit?> GetVisitByAppointmentIdAsync(Guid appointmentId, CancellationToken cancellationToken = default);
+        Task<int> GetTodayCompletedCountAsync(Guid clinicId, CancellationToken cancellationToken = default);
     }
 }

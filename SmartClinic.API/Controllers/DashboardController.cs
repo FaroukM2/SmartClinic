@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartClinic.Application.Features.Dashboard.Queries.GetDashboardStats;
 using System;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class DashboardController : ControllerBase

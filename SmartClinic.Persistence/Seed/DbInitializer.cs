@@ -20,11 +20,11 @@ public static class DbInitializer
 
         try
         {
-            await context.Database.EnsureCreatedAsync();
+            await context.Database.MigrateAsync();
         }
-        catch
+        catch (Exception ex)
         {
-            // Database might already exist or connection pending
+            Console.WriteLine($"[DbInitializer Warning] Migration check: {ex.Message}");
         }
 
         if (await context.Users.AnyAsync())

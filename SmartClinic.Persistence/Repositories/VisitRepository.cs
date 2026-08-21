@@ -50,5 +50,14 @@ namespace SmartClinic.Persistence.Repositories
                 .Include(v => v.Payment)
                 .FirstOrDefaultAsync(v => v.AppointmentId == appointmentId, cancellationToken);
         }
+
+        public async Task<int> GetTodayCompletedCountAsync(Guid clinicId, CancellationToken cancellationToken = default)
+        {
+            var todayUtc = DateTime.UtcNow.Date;
+            return await _context.Visits
+                .CountAsync(v => v.Appointment.DoctorBranch.Branch.ClinicId == clinicId
+                              && v.Appointment.AppointmentStatus == Domain.Enums.AppointmentStatus.Completed
+                              && v.CreatedAt.Date == todayUtc, cancellationToken);
+        }
     }
 }

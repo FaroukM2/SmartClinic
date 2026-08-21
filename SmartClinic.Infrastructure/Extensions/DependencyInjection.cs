@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmartClinic.Application.Interfaces.Authentication;
 using SmartClinic.Infrastructure.Authentication;
@@ -23,6 +23,9 @@ namespace SmartClinic.Infrastructure.Extensions
             services.AddScoped<IPasswordHasher, PasswordHasher>();
 
             services.AddScoped<IJwtProvider, JwtProvider>();
+
+            services.AddHttpContextAccessor();
+            services.AddScoped<SmartClinic.Application.Interfaces.Services.ICurrentUserService, SmartClinic.Infrastructure.Services.CurrentUserService>();
 
             services.AddJwtAuthentication(configuration);
 

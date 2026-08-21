@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using SmartClinic.Application.Interfaces.Authentication;
 using SmartClinic.Application.Interfaces.Persistence;
 using System;
@@ -76,7 +76,15 @@ namespace SmartClinic.Application.Features.Authentication.Commands.Login
             {
                 Token = accessToken,
                 RefreshToken = refreshToken,
-                Expiration = DateTime.UtcNow.AddMinutes(60)
+                Expiration = DateTime.UtcNow.AddMinutes(60),
+                User = new SmartClinic.Application.Features.Authentication.DTOs.UserDto
+                {
+                    Id = user.Id,
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    UserType = user.UserType.ToString(),
+                    ClinicId = user.ClinicId
+                }
             };
         }
     }

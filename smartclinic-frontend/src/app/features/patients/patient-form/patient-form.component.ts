@@ -40,8 +40,8 @@ import { AuthService } from '../../../core/services/auth.service';
             <div class="form-group">
               <label>Gender *</label>
               <select class="form-control" formControlName="gender">
-                <option [value]="0">Male</option>
-                <option [value]="1">Female</option>
+                <option [value]="1">Male</option>
+                <option [value]="2">Female</option>
               </select>
             </div>
 
@@ -59,14 +59,14 @@ import { AuthService } from '../../../core/services/auth.service';
               <label>Blood Type (Optional)</label>
               <select class="form-control" formControlName="bloodType">
                 <option [ngValue]="null">Select Blood Type</option>
-                <option [value]="0">A+</option>
-                <option [value]="1">A-</option>
-                <option [value]="2">B+</option>
-                <option [value]="3">B-</option>
-                <option [value]="4">AB+</option>
-                <option [value]="5">AB-</option>
-                <option [value]="6">O+</option>
-                <option [value]="7">O-</option>
+                <option [value]="1">A+</option>
+                <option [value]="2">A-</option>
+                <option [value]="3">B+</option>
+                <option [value]="4">B-</option>
+                <option [value]="5">AB+</option>
+                <option [value]="6">AB-</option>
+                <option [value]="7">O+</option>
+                <option [value]="8">O-</option>
               </select>
             </div>
 
@@ -106,7 +106,7 @@ export class PatientFormComponent {
     this.form = this.fb.group({
       fullName: ['', Validators.required],
       dateOfBirth: ['1990-01-01', Validators.required],
-      gender: [0, Validators.required],
+      gender: [1, Validators.required],
       primaryPhone: ['', Validators.required],
       secondaryPhone: [''],
       address: [''],

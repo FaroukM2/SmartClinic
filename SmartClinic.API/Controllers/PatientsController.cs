@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartClinic.Application.Features.Patients.Commands.AddOrUpdateMedicalHistory;
 using SmartClinic.Application.Features.Patients.Commands.CreatePatient;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class PatientsController : ControllerBase

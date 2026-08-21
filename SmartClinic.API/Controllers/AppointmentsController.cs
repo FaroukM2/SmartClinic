@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartClinic.Application.Features.Appointments.Commands.BookAppointment;
 using SmartClinic.Application.Features.Appointments.Commands.ChangeAppointmentStatus;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class AppointmentsController : ControllerBase

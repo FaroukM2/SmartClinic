@@ -14,5 +14,6 @@ namespace SmartClinic.Application.Interfaces.Persistence
         Task<int> GetNextQueueNumberAsync(Guid doctorBranchId, DateOnly appointmentDate, CancellationToken cancellationToken = default);
         Task<IReadOnlyList<Appointment>> GetAppointmentsByDoctorBranchAsync(Guid doctorBranchId, DateOnly date, CancellationToken cancellationToken = default);
         Task<IReadOnlyList<Appointment>> GetAppointmentsByPatientAsync(Guid patientId, CancellationToken cancellationToken = default);
+        Task<int> GetTodayCountAsync(Guid clinicId, DateOnly date, CancellationToken cancellationToken = default);
     }
 }

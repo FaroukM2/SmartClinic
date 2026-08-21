@@ -1,12 +1,17 @@
-﻿using System;
+using SmartClinic.Domain.Entities;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SmartClinic.Application.Interfaces.Persistence
 {
-    internal interface IClinicRepository
+    public interface IClinicRepository
     {
+        Task AddAsync(Clinic clinic, CancellationToken cancellationToken = default);
+        Task UpdateAsync(Clinic clinic, CancellationToken cancellationToken = default);
+        Task<Clinic?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<Clinic>> GetAllAsync(CancellationToken cancellationToken = default);
     }
 }
+

@@ -20,6 +20,7 @@ namespace SmartClinic.Persistence.Extensions
                     configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.AddScoped<IClinicRepository, ClinicRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBranchRepository, BranchRepository>();
             services.AddScoped<ISpecializationRepository, SpecializationRepository>();

@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartClinic.Application.Features.Branches.Commands.CreateBranch;
 using SmartClinic.Application.Features.Branches.Commands.UpdateBranch;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class BranchesController : ControllerBase

@@ -38,8 +38,16 @@ export class ClinicService {
     return this.http.post<string>(`${environment.apiUrl}/Visits/start`, { appointmentId });
   }
 
-  updateVisit(req: Partial<Visit>): Observable<void> {
-    return this.http.put<void>(`${environment.apiUrl}/Visits/update`, req);
+  updateVisit(req: any): Observable<void> {
+    const payload = {
+      visitId: req.visitId || req.id,
+      chiefComplaint: req.chiefComplaint,
+      physicalExamination: req.physicalExamination || '',
+      diagnosis: req.diagnosis,
+      doctorNotes: req.doctorNotes || req.treatment || '',
+      isCompleted: req.isCompleted || false
+    };
+    return this.http.put<void>(`${environment.apiUrl}/Visits/update`, payload);
   }
 
   getVisitById(id: string): Observable<Visit> {
@@ -56,8 +64,15 @@ export class ClinicService {
   }
 
   // ── Payments ───────────────────────────────────────────────────
-  processPayment(req: Partial<Payment>): Observable<string> {
-    return this.http.post<string>(`${environment.apiUrl}/Payments/process`, req);
+  processPayment(req: any): Observable<string> {
+    const payload = {
+      visitId: req.visitId,
+      amount: req.amount ?? req.totalAmount ?? 0,
+      discount: req.discount ?? req.discountAmount ?? 0,
+      paymentMethod: Number(req.paymentMethod ?? 1),
+      createdByUserId: req.createdByUserId || '00000000-0000-0000-0000-000000000000'
+    };
+    return this.http.post<string>(`${environment.apiUrl}/Payments/process`, payload);
   }
 
   getPaymentByVisitId(visitId: string): Observable<Payment> {

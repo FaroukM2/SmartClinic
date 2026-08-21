@@ -17,5 +17,6 @@ namespace SmartClinic.Application.Interfaces.Persistence
         Task UpdateDoctorBranchAsync(DoctorBranch doctorBranch, CancellationToken cancellationToken = default);
         Task AddDoctorScheduleAsync(DoctorSchedule schedule, CancellationToken cancellationToken = default);
         Task<IReadOnlyList<DoctorSchedule>> GetDoctorSchedulesAsync(Guid doctorBranchId, CancellationToken cancellationToken = default);
+        Task<int> GetActiveCountAsync(Guid clinicId, CancellationToken cancellationToken = default);
     }
 }

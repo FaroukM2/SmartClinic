@@ -42,7 +42,7 @@ import { Visit, PrescriptionItem } from '../../../core/models/clinic.models';
               <textarea class="form-control" rows="3" [(ngModel)]="visit.diagnosis" placeholder="e.g. Acute Bronchitis"></textarea>
             </div>
             <div class="form-group mb-4">
-              <label>Treatment Plan</label>
+              <label>Treatment Plan / Doctor Notes</label>
               <textarea class="form-control" rows="3" [(ngModel)]="visit.treatment" placeholder="e.g. Rest, oral hydration, antibiotic course"></textarea>
             </div>
 
@@ -96,9 +96,9 @@ import { Visit, PrescriptionItem } from '../../../core/models/clinic.models';
               <div class="form-group">
                 <label>Payment Method</label>
                 <select class="form-control" [(ngModel)]="payment.paymentMethod">
-                  <option [value]="0">Cash</option>
-                  <option [value]="1">Credit Card</option>
-                  <option [value]="2">Insurance</option>
+                  <option [value]="1">Cash</option>
+                  <option [value]="2">Credit Card</option>
+                  <option [value]="3">Insurance</option>
                 </select>
               </div>
               <div class="form-group" style="display:flex;align-items:flex-end">
@@ -133,7 +133,7 @@ export class VisitDetailComponent implements OnInit {
   payment = {
     totalAmount: 350,
     discountAmount: 0,
-    paymentMethod: 0
+    paymentMethod: 1
   };
 
   constructor(

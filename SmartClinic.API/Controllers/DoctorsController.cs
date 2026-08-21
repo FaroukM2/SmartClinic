@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartClinic.Application.Features.Doctors.Commands.AssignDoctorToBranch;
 using SmartClinic.Application.Features.Doctors.Commands.CreateDoctor;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class DoctorsController : ControllerBase

@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartClinic.Application.Features.Prescriptions.Commands.CreatePrescription;
 using SmartClinic.Application.Features.Prescriptions.Queries.GetPrescriptionByVisitId;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class PrescriptionsController : ControllerBase

@@ -83,5 +83,11 @@ namespace SmartClinic.Persistence.Repositories
                 .Where(ds => ds.DoctorBranchId == doctorBranchId)
                 .ToListAsync(cancellationToken);
         }
+
+        public async Task<int> GetActiveCountAsync(Guid clinicId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Doctors
+                .CountAsync(d => d.User.ClinicId == clinicId && d.User.IsActive, cancellationToken);
+        }
     }
 }

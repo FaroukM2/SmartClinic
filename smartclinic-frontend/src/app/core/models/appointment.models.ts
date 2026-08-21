@@ -29,19 +29,19 @@ export interface ChangeAppointmentStatusRequest {
 }
 
 export const AppointmentStatusLabels: Record<number, string> = {
-  0: 'Scheduled',
-  1: 'In Queue',
-  2: 'In Consultation',
-  3: 'Completed',
-  4: 'Cancelled',
-  5: 'No Show'
+  1: 'Reserved',
+  2: 'Waiting',
+  3: 'In Consultation',
+  4: 'Completed',
+  5: 'Cancelled',
+  6: 'No Show'
 };
 
 export const AppointmentStatusBadge: Record<number, string> = {
-  0: 'info',
-  1: 'warning',
-  2: 'primary',
-  3: 'success',
-  4: 'danger',
-  5: 'secondary'
+  1: 'info',
+  2: 'warning',
+  3: 'primary',
+  4: 'success',
+  5: 'danger',
+  6: 'secondary'
 };

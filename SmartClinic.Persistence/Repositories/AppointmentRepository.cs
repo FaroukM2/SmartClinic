@@ -71,5 +71,11 @@ namespace SmartClinic.Persistence.Repositories
                 .OrderByDescending(a => a.AppointmentDate)
                 .ToListAsync(cancellationToken);
         }
+
+        public async Task<int> GetTodayCountAsync(Guid clinicId, DateOnly date, CancellationToken cancellationToken = default)
+        {
+            return await _context.Appointments
+                .CountAsync(a => a.DoctorBranch.Branch.ClinicId == clinicId && a.AppointmentDate == date, cancellationToken);
+        }
     }
 }
