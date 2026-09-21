@@ -131,7 +131,14 @@ export class PatientFormComponent {
         this.router.navigate(['/patients', patientId]);
       },
       error: (err) => {
-        this.error.set(err?.error?.message ?? 'Failed to create patient record.');
+        let msg = err?.error?.message;
+        if (!msg && err?.error?.errors) {
+          msg = Object.values(err.error.errors).flat().join(' ');
+        }
+        if (!msg && err?.error?.title) {
+          msg = err.error.title;
+        }
+        this.error.set(msg || 'Failed to create patient record. Please verify input data.');
         this.loading.set(false);
       }
     });

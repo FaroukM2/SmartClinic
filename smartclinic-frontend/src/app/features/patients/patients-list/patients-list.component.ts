@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -16,12 +16,14 @@ import { Patient, GenderLabels, BloodTypeLabels } from '../../../core/models/pat
         <h1>Patients Directory</h1>
         <p>Manage and search all registered clinic patients</p>
       </div>
-      <div class="page-header__actions">
-        <a routerLink="/patients/new" class="btn btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Register Patient
-        </a>
-      </div>
+      @if (canRegisterPatient()) {
+        <div class="page-header__actions">
+          <a routerLink="/patients/new" class="btn btn-primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Register Patient
+          </a>
+        </div>
+      }
     </div>
 
     <!-- Search & Filters -->
@@ -112,14 +114,14 @@ import { Patient, GenderLabels, BloodTypeLabels } from '../../../core/models/pat
   `
 })
 export class PatientsListComponent implements OnInit {
+  private patientService = inject(PatientService);
+  private auth = inject(AuthService);
+
   patients = signal<Patient[]>([]);
   loading  = signal(true);
   searchTerm = '';
 
-  constructor(
-    private patientService: PatientService,
-    private auth: AuthService
-  ) {}
+  readonly canRegisterPatient = computed(() => this.auth.isAdmin() || this.auth.isReceptionist());
 
   ngOnInit(): void {
     this.loadPatients();

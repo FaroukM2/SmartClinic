@@ -24,6 +24,10 @@ export class DoctorService {
     return this.http.get<Doctor[]>(`${this.base}/branch/${branchId}`);
   }
 
+  getDoctorsByClinic(clinicId: string): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this.base}/clinic/${clinicId}`);
+  }
+
   assignDoctorToBranch(req: DoctorBranch): Observable<void> {
     return this.http.post<void>(`${this.base}/assign-branch`, req);
   }

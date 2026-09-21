@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -105,14 +105,30 @@ import { Branch, Doctor } from '../../../core/models/doctor.models';
                     </td>
                     <td class="text-muted fs-xs">{{ app.notes || '—' }}</td>
                     <td style="text-align:right">
-                      @if (app.appointmentStatus === 0 || app.appointmentStatus === 1) {
-                        <button class="btn btn-primary btn-sm" (click)="startVisit(app.id)">
-                          🚀 Start Visit
-                        </button>
-                      } @else if (app.appointmentStatus === 2) {
-                        <span class="badge badge-warning">In Consultation</span>
+                      @if (isReceptionist()) {
+                        @if (app.appointmentStatus === 1) {
+                          <button class="btn btn-primary btn-sm" (click)="checkIn(app)" title="Check-in patient to waiting room">
+                            📥 Check-In
+                          </button>
+                        } @else if (app.appointmentStatus === 2) {
+                          <span class="badge badge-warning">Waiting in Queue</span>
+                        } @else if (app.appointmentStatus === 3) {
+                          <span class="badge badge-primary">With Doctor</span>
+                        } @else if (app.appointmentStatus === 4) {
+                          <a routerLink="/payments" class="btn btn-secondary btn-sm">💳 Billing</a>
+                        } @else {
+                          <span class="text-muted fs-xs">—</span>
+                        }
                       } @else {
-                        <span class="badge badge-success">Completed</span>
+                        @if (app.appointmentStatus === 1 || app.appointmentStatus === 2) {
+                          <button class="btn btn-primary btn-sm" (click)="startVisit(app.id)">
+                            🚀 Start Visit
+                          </button>
+                        } @else if (app.appointmentStatus === 3) {
+                          <span class="badge badge-warning">In Consultation</span>
+                        } @else {
+                          <span class="badge badge-success">Completed</span>
+                        }
                       }
                     </td>
                   </tr>
@@ -134,21 +150,22 @@ import { Branch, Doctor } from '../../../core/models/doctor.models';
   `]
 })
 export class AppointmentsListComponent implements OnInit {
+  private clinicService = inject(ClinicService);
+  private doctorService = inject(DoctorService);
+  private auth = inject(AuthService);
+  private router = inject(Router);
+
   branches = signal<Branch[]>([]);
   doctors  = signal<Doctor[]>([]);
   appointments = signal<Appointment[]>([]);
   loading  = signal(true);
 
+  readonly isReceptionist = this.auth.isReceptionist;
+  readonly isDoctor = this.auth.isDoctor;
+
   selectedBranchId = '';
   selectedDoctorId = '';
   selectedDate     = new Date().toISOString().split('T')[0];
-
-  constructor(
-    private clinicService: ClinicService,
-    private doctorService: DoctorService,
-    private auth: AuthService,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     const cid = this.auth.clinicId();
@@ -185,6 +202,17 @@ export class AppointmentsListComponent implements OnInit {
     this.clinicService.getAppointmentsByDoctorBranch(doctorBranchId, this.selectedDate).subscribe({
       next: (res) => { this.appointments.set(res); this.loading.set(false); },
       error: () => { this.appointments.set([]); this.loading.set(false); }
+    });
+  }
+
+  checkIn(app: Appointment): void {
+    this.clinicService.changeAppointmentStatus({
+      appointmentId: app.id,
+      newStatus: 2 // Waiting
+    }).subscribe({
+      next: () => {
+        app.appointmentStatus = 2;
+      }
     });
   }
 

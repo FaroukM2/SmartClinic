@@ -27,47 +27,126 @@ import { UiService } from '../../../core/services/ui.service';
       <!-- ── Nav ────────────────────────────────────── -->
       <nav class="sidebar__nav">
 
-        <span class="nav-group">Main</span>
+        @if (isAdmin()) {
+          <!-- ADMIN NAV -->
+          <span class="nav-group">Main</span>
 
-        <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" title="Dashboard">
-          <svg class="ni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          <span class="nav-label">Dashboard</span>
-        </a>
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" title="Dashboard">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span class="nav-label">Dashboard</span>
+          </a>
 
-        <a routerLink="/appointments" routerLinkActive="active" class="nav-item" title="Appointments">
-          <svg class="ni" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-          <span class="nav-label">Appointments</span>
-        </a>
+          <a routerLink="/appointments" routerLinkActive="active" class="nav-item" title="Appointments">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            <span class="nav-label">Appointments</span>
+          </a>
 
-        <a routerLink="/patients" routerLinkActive="active" class="nav-item" title="Patients">
-          <svg class="ni" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
-          <span class="nav-label">Patients</span>
-        </a>
+          <a routerLink="/patients" routerLinkActive="active" class="nav-item" title="Patients">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+            <span class="nav-label">Patients</span>
+          </a>
 
-        <a routerLink="/payments" routerLinkActive="active" class="nav-item" title="Payments">
-          <svg class="ni" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          <span class="nav-label">Payments</span>
-        </a>
+          <a routerLink="/payments" routerLinkActive="active" class="nav-item" title="Payments">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span class="nav-label">Payments</span>
+          </a>
 
-        <span class="nav-group" style="margin-top:8px">Management</span>
+          <span class="nav-group" style="margin-top:8px">Clinic Administration</span>
 
-        <a routerLink="/doctors" routerLinkActive="active" class="nav-item" title="Doctors">
-          <svg class="ni" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <span class="nav-label">Doctors</span>
-        </a>
+          <a routerLink="/doctors" routerLinkActive="active" class="nav-item" title="Doctors">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span class="nav-label">Doctors & Staff</span>
+          </a>
 
-        <a routerLink="/branches" routerLinkActive="active" class="nav-item" title="Branches">
-          <svg class="ni" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span class="nav-label">Branches</span>
-        </a>
+          <a routerLink="/branches" routerLinkActive="active" class="nav-item" title="Branches">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="nav-label">Branches</span>
+          </a>
 
-        <a routerLink="/settings" routerLinkActive="active" class="nav-item" title="Settings">
-          <svg class="ni" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-          <span class="nav-label">Settings</span>
-        </a>
+          <a routerLink="/settings" routerLinkActive="active" class="nav-item" title="Settings">
+            <svg class="ni" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span class="nav-label">Settings</span>
+          </a>
+        } @else if (isDoctor()) {
+          <!-- DOCTOR NAV -->
+          <span class="nav-group">Clinical Care</span>
+
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" title="Doctor Dashboard">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span class="nav-label">Doctor Workspace</span>
+          </a>
+
+          <a routerLink="/appointments" routerLinkActive="active" class="nav-item" title="Clinic Queue">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            <span class="nav-label">Today's Queue</span>
+          </a>
+
+          <a routerLink="/patients" routerLinkActive="active" class="nav-item" title="Patients">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+            <span class="nav-label">Patient Records</span>
+          </a>
+
+          <span class="nav-group" style="margin-top:8px">Medical Team</span>
+
+          <a routerLink="/doctors" routerLinkActive="active" class="nav-item" title="Colleagues">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span class="nav-label">Clinic Colleagues</span>
+          </a>
+        } @else if (isPatient()) {
+          <!-- PATIENT NAV -->
+          <span class="nav-group">My Health</span>
+
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" title="Patient Portal">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span class="nav-label">Patient Portal</span>
+          </a>
+
+          <a routerLink="/appointments/new" routerLinkActive="active" class="nav-item" title="Book Appointment">
+            <svg class="ni" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span class="nav-label">Book Appointment</span>
+          </a>
+
+          <a routerLink="/appointments" routerLinkActive="active" class="nav-item" title="My Appointments">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            <span class="nav-label">My Consultations</span>
+          </a>
+
+          <a routerLink="/doctors" routerLinkActive="active" class="nav-item" title="Our Doctors">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span class="nav-label">Our Specialists</span>
+          </a>
+        } @else {
+          <!-- RECEPTIONIST NAV -->
+          <span class="nav-group">Reception</span>
+
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-item" title="Dashboard">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <span class="nav-label">Dashboard</span>
+          </a>
+
+          <a routerLink="/appointments" routerLinkActive="active" class="nav-item" title="Appointments">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            <span class="nav-label">Appointments</span>
+          </a>
+
+          <a routerLink="/patients" routerLinkActive="active" class="nav-item" title="Patients">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+            <span class="nav-label">Patients</span>
+          </a>
+
+          <a routerLink="/payments" routerLinkActive="active" class="nav-item" title="Payments">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span class="nav-label">Payments</span>
+          </a>
+
+          <a routerLink="/doctors" routerLinkActive="active" class="nav-item" title="Doctors">
+            <svg class="ni" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span class="nav-label">Doctors</span>
+          </a>
+        }
 
       </nav>
 
@@ -111,6 +190,10 @@ export class SidebarComponent {
   private auth = inject(AuthService);
 
   readonly collapsed = this.ui.sidebarCollapsed;
+
+  readonly isAdmin   = this.auth.isAdmin;
+  readonly isDoctor  = this.auth.isDoctor;
+  readonly isPatient = this.auth.isPatient;
 
   readonly userName = computed(() => this.auth.currentUser()?.fullName ?? 'Admin');
   readonly userRole = computed(() => this.auth.currentUser()?.userType ?? 'ClinicAdmin');

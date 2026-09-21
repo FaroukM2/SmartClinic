@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class UiService {
-  readonly sidebarCollapsed = signal(true);
+  readonly sidebarCollapsed = signal(false);
 
   toggleSidebar(): void {
     this.sidebarCollapsed.update(v => !v);

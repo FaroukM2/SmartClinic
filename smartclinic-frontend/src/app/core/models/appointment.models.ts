@@ -12,7 +12,8 @@ export interface Appointment {
   statusLabel?: string;
   queueNumber?: number;
   notes?: string;
-  createdOn: string;
+  clinicId?: string;
+  createdOn?: string;
 }
 
 export interface BookAppointmentRequest {

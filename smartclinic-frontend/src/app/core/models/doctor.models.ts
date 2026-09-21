@@ -1,14 +1,23 @@
+export interface DoctorBranchInfo {
+  branchId: string;
+  branchName: string;
+  consultationFee?: number;
+}
+
 export interface Doctor {
   id: string;
   fullName: string;
   email: string;
-  phoneNumber: string;
+  phoneNumber?: string;
+  phone?: string;
   specializationId: string;
   specializationName?: string;
   title?: string;
   licenseNumber?: string;
+  yearsOfExperience?: number;
   consultationFee?: number;
   isActive: boolean;
+  branches?: DoctorBranchInfo[];
 }
 
 export interface DoctorBranch {

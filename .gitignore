@@ -23,3 +23,17 @@ obj/
 
 # Publish
 publish/
+.fake
+
+# VS Code History & Temporary
+.history/
+*.user
+*.suo
+
+# Node & Angular
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.angular/
+**/.angular/

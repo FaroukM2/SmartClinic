@@ -26,3 +26,19 @@ export interface RegisterRequest {
   password: string;
   userType: number;
 }
+
+export interface RegisterPatientRequest {
+  clinicId: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  gender: number;
+  dateOfBirth: string;
+  address?: string;
+}
+
+export interface ActivateDoctorRequest {
+  email: string;
+  password: string;
+}
