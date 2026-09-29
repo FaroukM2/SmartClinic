@@ -24,6 +24,11 @@ public class AppointmentsController : ControllerBase
     [HttpPost("book")]
     public async Task<IActionResult> Book([FromBody] BookAppointmentCommand command)
     {
+        if (command.DoctorBranchId == Guid.Empty && command.DoctorId.HasValue && command.DoctorId.Value != Guid.Empty)
+        {
+            command = command with { DoctorBranchId = command.DoctorId.Value };
+        }
+
         var appointmentId = await _mediator.Send(command);
         return Ok(appointmentId);
     }

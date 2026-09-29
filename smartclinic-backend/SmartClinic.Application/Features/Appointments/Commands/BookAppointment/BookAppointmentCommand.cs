@@ -8,6 +8,7 @@ namespace SmartClinic.Application.Features.Appointments.Commands.BookAppointment
         Guid DoctorBranchId,
         DateOnly AppointmentDate,
         string? Notes,
+        Guid? DoctorId = null,
         bool IsOverriddenByDoctor = false
     ) : IRequest<Guid>;
 }

@@ -30,9 +30,11 @@ namespace SmartClinic.Application.Features.Appointments.Commands.BookAppointment
 
         public async Task<Guid> Handle(BookAppointmentCommand request, CancellationToken cancellationToken)
         {
-            var targetDoctorBranchId = request.DoctorBranchId;
+            var targetDoctorBranchId = request.DoctorBranchId != Guid.Empty
+                ? request.DoctorBranchId
+                : (request.DoctorId ?? Guid.Empty);
 
-            // 1. Verify if request.DoctorBranchId is already a valid DoctorBranch
+            // 1. Verify if targetDoctorBranchId is already a valid DoctorBranch
             var doctorBranch = await _doctorRepository.GetDoctorBranchByIdAsync(targetDoctorBranchId, cancellationToken);
 
             // 2. If not found, check if request.DoctorBranchId was passed as a DoctorId
