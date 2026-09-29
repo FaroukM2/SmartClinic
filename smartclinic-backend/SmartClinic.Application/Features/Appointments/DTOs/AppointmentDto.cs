@@ -10,9 +10,12 @@ namespace SmartClinic.Application.Features.Appointments.DTOs
         public string PatientName { get; set; } = null!;
         public string PatientPhone { get; set; } = null!;
         public Guid DoctorBranchId { get; set; }
+        public Guid? DoctorId { get; set; }
         public string DoctorName { get; set; } = null!;
+        public string? SpecializationName { get; set; }
         public string BranchName { get; set; } = null!;
         public DateOnly AppointmentDate { get; set; }
+        public string? StartTime { get; set; }
         public int QueueNumber { get; set; }
         public AppointmentStatus AppointmentStatus { get; set; }
         public bool IsOverriddenByDoctor { get; set; }

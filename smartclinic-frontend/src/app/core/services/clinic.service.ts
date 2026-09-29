@@ -33,6 +33,20 @@ export class ClinicService {
     return this.http.get<Appointment[]>(url);
   }
 
+  getAppointmentsByBranch(branchId: string, date: string, doctorId?: string, doctorBranchId?: string): Observable<Appointment[]> {
+    let url = `${environment.apiUrl}/Appointments/branch/${branchId}?date=${date}`;
+    if (doctorId) url += `&doctorId=${doctorId}`;
+    if (doctorBranchId) url += `&doctorBranchId=${doctorBranchId}`;
+    return this.http.get<Appointment[]>(url);
+  }
+
+  getAvailableSlots(branchId: string, date: string, doctorId?: string, doctorBranchId?: string): Observable<import('../models/appointment.models').AvailableTimeSlot[]> {
+    let url = `${environment.apiUrl}/Appointments/available-slots?branchId=${branchId}&date=${date}`;
+    if (doctorId) url += `&doctorId=${doctorId}`;
+    if (doctorBranchId) url += `&doctorBranchId=${doctorBranchId}`;
+    return this.http.get<import('../models/appointment.models').AvailableTimeSlot[]>(url);
+  }
+
   // ── Visits ─────────────────────────────────────────────────────
   startVisit(appointmentId: string): Observable<string> {
     return this.http.post<string>(`${environment.apiUrl}/Visits/start`, { appointmentId });

@@ -1,10 +1,21 @@
+export interface AvailableTimeSlot {
+  time: string;
+  displayTime: string;
+  isAvailable: boolean;
+  isBooked: boolean;
+  isPast: boolean;
+}
+
 export interface Appointment {
   id: string;
   patientId: string;
   patientName?: string;
   patientMedicalCode?: string;
+  patientPhone?: string;
   doctorBranchId: string;
+  doctorId?: string;
   doctorName?: string;
+  specializationName?: string;
   branchName?: string;
   appointmentDate: string;
   startTime?: string;
@@ -18,10 +29,13 @@ export interface Appointment {
 
 export interface BookAppointmentRequest {
   patientId: string;
-  doctorBranchId: string;
+  doctorBranchId?: string;
+  doctorId?: string;
+  branchId?: string;
   appointmentDate: string;
   startTime?: string;
   notes?: string;
+  consultationType?: number;
 }
 
 export interface ChangeAppointmentStatusRequest {
@@ -46,3 +60,8 @@ export const AppointmentStatusBadge: Record<number, string> = {
   5: 'danger',
   6: 'secondary'
 };
+
+export const ConsultationTypes = [
+  { id: 1, name: 'كشف عادي (Regular Examination)', feeMultiplier: 1.0 },
+  { id: 2, name: 'إعادة كشف / استشارة (Follow-Up)', feeMultiplier: 0.5 }
+];

@@ -40,6 +40,36 @@ public class AppointmentsController : ControllerBase
         return success ? Ok() : BadRequest();
     }
 
+    [HttpGet("branch/{branchId:guid}")]
+    public async Task<IActionResult> GetByBranch(
+        Guid branchId,
+        [FromQuery] DateOnly date,
+        [FromQuery] Guid? doctorId,
+        [FromQuery] Guid? doctorBranchId)
+    {
+        var result = await _mediator.Send(new SmartClinic.Application.Features.Appointments.Queries.GetAppointmentsByBranch.GetAppointmentsByBranchQuery(
+            branchId,
+            date,
+            doctorId,
+            doctorBranchId));
+        return Ok(result);
+    }
+
+    [HttpGet("available-slots")]
+    public async Task<IActionResult> GetAvailableSlots(
+        [FromQuery] Guid branchId,
+        [FromQuery] Guid? doctorId,
+        [FromQuery] Guid? doctorBranchId,
+        [FromQuery] DateOnly date)
+    {
+        var result = await _mediator.Send(new SmartClinic.Application.Features.Appointments.Queries.GetAvailableTimeSlots.GetAvailableTimeSlotsQuery(
+            branchId,
+            doctorId,
+            doctorBranchId,
+            date));
+        return Ok(result);
+    }
+
     [HttpGet("doctor-branch/{doctorBranchId:guid}")]
     public async Task<IActionResult> GetByDoctorBranch(Guid doctorBranchId, [FromQuery] DateOnly date)
     {

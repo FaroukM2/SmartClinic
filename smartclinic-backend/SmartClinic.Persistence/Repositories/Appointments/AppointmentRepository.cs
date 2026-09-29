@@ -55,9 +55,44 @@ namespace SmartClinic.Persistence.Repositories
             return await _context.Appointments
                 .Where(a => a.DoctorBranchId == doctorBranchId && a.AppointmentDate == date)
                 .Include(a => a.Patient)
+                .Include(a => a.DoctorBranch)
+                    .ThenInclude(db => db.Doctor)
+                        .ThenInclude(d => d.User)
+                .Include(a => a.DoctorBranch)
+                    .ThenInclude(db => db.Doctor)
+                        .ThenInclude(d => d.Specialization)
+                .Include(a => a.DoctorBranch)
+                    .ThenInclude(db => db.Branch)
                 .Include(a => a.Visit)
                 .OrderBy(a => a.QueueNumber)
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<IReadOnlyList<Appointment>> GetAppointmentsByBranchAsync(Guid branchId, DateOnly date, Guid? doctorBranchId = null, Guid? doctorId = null, CancellationToken cancellationToken = default)
+        {
+            var query = _context.Appointments
+                .Include(a => a.Patient)
+                .Include(a => a.DoctorBranch)
+                    .ThenInclude(db => db.Doctor)
+                        .ThenInclude(d => d.User)
+                .Include(a => a.DoctorBranch)
+                    .ThenInclude(db => db.Doctor)
+                        .ThenInclude(d => d.Specialization)
+                .Include(a => a.DoctorBranch)
+                    .ThenInclude(db => db.Branch)
+                .Include(a => a.Visit)
+                .Where(a => a.AppointmentDate == date && a.DoctorBranch.BranchId == branchId);
+
+            if (doctorBranchId.HasValue && doctorBranchId.Value != Guid.Empty)
+            {
+                query = query.Where(a => a.DoctorBranchId == doctorBranchId.Value);
+            }
+            else if (doctorId.HasValue && doctorId.Value != Guid.Empty)
+            {
+                query = query.Where(a => a.DoctorBranch.DoctorId == doctorId.Value);
+            }
+
+            return await query.OrderBy(a => a.QueueNumber).ToListAsync(cancellationToken);
         }
 
         public async Task<IReadOnlyList<Appointment>> GetAppointmentsByPatientAsync(Guid patientId, CancellationToken cancellationToken = default)
