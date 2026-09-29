@@ -77,6 +77,20 @@ namespace SmartClinic.Persistence.Repositories
                 .FirstOrDefaultAsync(db => db.DoctorId == doctorId && db.BranchId == branchId, cancellationToken);
         }
 
+        public async Task<DoctorBranch?> GetDoctorBranchByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return await _context.DoctorBranches
+                .Include(db => db.DoctorSchedules)
+                .FirstOrDefaultAsync(db => db.Id == id, cancellationToken);
+        }
+
+        public async Task<DoctorBranch?> GetFirstDoctorBranchByDoctorIdAsync(Guid doctorId, CancellationToken cancellationToken = default)
+        {
+            return await _context.DoctorBranches
+                .Include(db => db.DoctorSchedules)
+                .FirstOrDefaultAsync(db => db.DoctorId == doctorId && db.IsActive, cancellationToken);
+        }
+
         public async Task AddDoctorBranchAsync(DoctorBranch doctorBranch, CancellationToken cancellationToken = default)
         {
             await _context.DoctorBranches.AddAsync(doctorBranch, cancellationToken);

@@ -17,11 +17,13 @@ namespace SmartClinic.Application.Features.Doctors.DTOs
         public string LicenseNumber { get; set; } = null!;
         public int YearsOfExperience { get; set; }
         public string? Bio { get; set; }
+        public Guid? DoctorBranchId => Branches.Count > 0 ? Branches[0].Id : null;
         public List<DoctorBranchDto> Branches { get; set; } = new();
     }
 
     public class DoctorBranchDto
     {
+        public Guid Id { get; set; }
         public Guid DoctorId { get; set; }
         public Guid BranchId { get; set; }
         public string BranchName { get; set; } = null!;

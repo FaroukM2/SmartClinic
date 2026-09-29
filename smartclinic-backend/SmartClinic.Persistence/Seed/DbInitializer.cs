@@ -390,6 +390,32 @@ public static class DbInitializer
             }
         }
 
+        // Ensure every Doctor has at least one DoctorBranch assignment
+        var unassignedDoctors = await context.Doctors
+            .Include(d => d.DoctorBranches)
+            .Where(d => !d.DoctorBranches.Any())
+            .ToListAsync();
+
+        var fallbackBranch = mainBranch ?? await context.Branches.FirstOrDefaultAsync(b => b.ClinicId == clinic.Id);
+        if (fallbackBranch != null && unassignedDoctors.Count > 0)
+        {
+            foreach (var doc in unassignedDoctors)
+            {
+                var db = new DoctorBranch
+                {
+                    DoctorId = doc.Id,
+                    BranchId = fallbackBranch.Id,
+                    ConsultationFee = 350m,
+                    FollowUpFee = 150m,
+                    FollowUpDaysLimit = 14,
+                    SlotDurationMinutes = 20,
+                    IsActive = true
+                };
+                await context.DoctorBranches.AddAsync(db);
+            }
+            await context.SaveChangesAsync();
+        }
+
         // 7. Ensure 6 Patients exist
         if (!await context.Patients.AnyAsync())
         {
