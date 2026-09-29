@@ -487,129 +487,9 @@ export class DashboardComponent implements OnInit {
     todayAppointmentsCount: 4,
     completedVisitsToday: 2,
     todayRevenue: 2450,
-    activeDoctorsCount: 4,
-    activeBranchesCount: 2
+    activeDoctorsCount: 0,
+    activeBranchesCount: 0
   };
-
-  private readonly sampleDoctors: Doctor[] = [
-    {
-      id: '11111111-1111-1111-1111-111111111111',
-      fullName: 'Dr. Tamer Hosny',
-      email: 'tamer@smartclinic.com',
-      phoneNumber: '01011112222',
-      specializationId: 'cardio',
-      specializationName: 'Cardiology',
-      title: 'Senior Cardiologist',
-      licenseNumber: 'LIC-CARD-2024',
-      consultationFee: 450,
-      isActive: true
-    },
-    {
-      id: '22222222-2222-2222-2222-222222222222',
-      fullName: 'Dr. Sarah Mansour',
-      email: 'sarah@smartclinic.com',
-      phoneNumber: '01033334444',
-      specializationId: 'ped',
-      specializationName: 'Pediatrics',
-      title: 'Consultant Pediatrician',
-      licenseNumber: 'LIC-PED-2025',
-      consultationFee: 350,
-      isActive: true
-    },
-    {
-      id: '33333333-3333-3333-3333-333333333333',
-      fullName: 'Dr. Omar Farouk',
-      email: 'omar@smartclinic.com',
-      phoneNumber: '01055556666',
-      specializationId: 'ortho',
-      specializationName: 'Orthopedics',
-      title: 'Orthopedic Surgeon',
-      licenseNumber: 'LIC-ORTH-2023',
-      consultationFee: 500,
-      isActive: true
-    },
-    {
-      id: '44444444-4444-4444-4444-444444444444',
-      fullName: 'Dr. Mona El-Sayed',
-      email: 'mona@smartclinic.com',
-      phoneNumber: '01077778888',
-      specializationId: 'derm',
-      specializationName: 'Dermatology',
-      title: 'Dermatologist & Cosmetologist',
-      licenseNumber: 'LIC-DERM-2026',
-      consultationFee: 400,
-      isActive: true
-    }
-  ];
-
-  private readonly samplePatients: Patient[] = [
-    {
-      id: 'p1',
-      medicalCode: 'P-1001',
-      fullName: 'Ahmed Mahmoud',
-      primaryPhone: '01011122233',
-      gender: 1,
-      dateOfBirth: '1988-04-12',
-      clinicId: '',
-      isActive: true,
-      createdOn: '2026-08-01'
-    },
-    {
-      id: 'p2',
-      medicalCode: 'P-1002',
-      fullName: 'Mariam Youssef',
-      primaryPhone: '01022233344',
-      gender: 2,
-      dateOfBirth: '1995-09-23',
-      clinicId: '',
-      isActive: true,
-      createdOn: '2026-08-02'
-    },
-    {
-      id: 'p3',
-      medicalCode: 'P-1003',
-      fullName: 'Khaled Mostafa',
-      primaryPhone: '01033344455',
-      gender: 1,
-      dateOfBirth: '1976-11-05',
-      clinicId: '',
-      isActive: true,
-      createdOn: '2026-08-03'
-    },
-    {
-      id: 'p4',
-      medicalCode: 'P-1004',
-      fullName: 'Nourhan Ali',
-      primaryPhone: '01044455566',
-      gender: 2,
-      dateOfBirth: '2001-02-18',
-      clinicId: '',
-      isActive: true,
-      createdOn: '2026-08-04'
-    },
-    {
-      id: 'p5',
-      medicalCode: 'P-1005',
-      fullName: 'Ibrahim Hassan',
-      primaryPhone: '01055566677',
-      gender: 1,
-      dateOfBirth: '1965-07-30',
-      clinicId: '',
-      isActive: true,
-      createdOn: '2026-08-05'
-    },
-    {
-      id: 'p6',
-      medicalCode: 'P-1006',
-      fullName: 'Fatima El-Zahraa',
-      primaryPhone: '01066677788',
-      gender: 2,
-      dateOfBirth: '1992-12-14',
-      clinicId: '',
-      isActive: true,
-      createdOn: '2026-08-06'
-    }
-  ];
 
   ngOnInit(): void {
     this.loadRealStats();
@@ -623,8 +503,8 @@ export class DashboardComponent implements OnInit {
 
     if (!clinicId) {
       this.stats.set(this.zeroStats);
-      this.doctorsList.set(this.sampleDoctors);
-      this.patientsList.set(this.samplePatients);
+      this.doctorsList.set([]);
+      this.patientsList.set([]);
       this.loading.set(false);
       return;
     }
@@ -643,25 +523,25 @@ export class DashboardComponent implements OnInit {
         if (branches.length > 0) {
           this.doctorService.getDoctorsByBranch(branches[0].id).subscribe({
             next: (docs: Doctor[]) => {
-              this.doctorsList.set(docs.length > 0 ? docs : this.sampleDoctors);
+              this.doctorsList.set(docs || []);
             },
-            error: () => this.doctorsList.set(this.sampleDoctors)
+            error: () => this.doctorsList.set([])
           });
         } else {
-          this.doctorsList.set(this.sampleDoctors);
+          this.doctorsList.set([]);
         }
       },
-      error: () => this.doctorsList.set(this.sampleDoctors)
+      error: () => this.doctorsList.set([])
     });
 
     // 3. Fetch Patients
     this.patientService.searchPatients(clinicId, '').subscribe({
       next: (patients: Patient[]) => {
-        this.patientsList.set(patients.length > 0 ? patients : this.samplePatients);
+        this.patientsList.set(patients || []);
         this.loading.set(false);
       },
       error: () => {
-        this.patientsList.set(this.samplePatients);
+        this.patientsList.set([]);
         this.loading.set(false);
       }
     });

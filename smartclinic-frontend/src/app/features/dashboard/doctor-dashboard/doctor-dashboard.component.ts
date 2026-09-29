@@ -633,68 +633,36 @@ export class DoctorDashboardComponent implements OnInit {
               const currentDoc = docs.find(d => d.email === this.auth.currentUser()?.email) || docs[0];
               if (currentDoc) {
                 const today = new Date().toISOString().split('T')[0];
-                this.clinicService.getAppointmentsByDoctorBranch(mainBranch.id, today).subscribe({
+                this.clinicService.getAppointmentsByBranch(mainBranch.id, today, currentDoc.id).subscribe({
                   next: (apps) => {
-                    this.todayQueue.set(apps);
+                    this.todayQueue.set(apps || []);
                     this.loading.set(false);
                   },
-                  error: () => this.fallbackSampleQueue()
+                  error: () => {
+                    this.todayQueue.set([]);
+                    this.loading.set(false);
+                  }
                 });
               } else {
-                this.fallbackSampleQueue();
+                this.todayQueue.set([]);
+                this.loading.set(false);
               }
             },
-            error: () => this.fallbackSampleQueue()
+            error: () => {
+              this.todayQueue.set([]);
+              this.loading.set(false);
+            }
           });
         } else {
-          this.fallbackSampleQueue();
+          this.todayQueue.set([]);
+          this.loading.set(false);
         }
       },
-      error: () => this.fallbackSampleQueue()
-    });
-  }
-
-  private fallbackSampleQueue(): void {
-    const sample: Appointment[] = [
-      {
-        id: '11111111-1111-1111-1111-111111111111',
-        patientId: '22222222-2222-2222-2222-222222222222',
-        patientName: 'Ahmed Mahmoud',
-        patientMedicalCode: 'P-1001',
-        doctorBranchId: '33333333-3333-3333-3333-333333333333',
-        doctorName: this.doctorName(),
-        appointmentDate: new Date().toISOString().split('T')[0],
-        queueNumber: 1,
-        appointmentStatus: 1, // Waiting
-        notes: 'Follow up on hypertension'
-      },
-      {
-        id: '44444444-4444-4444-4444-444444444444',
-        patientId: '55555555-5555-5555-5555-555555555555',
-        patientName: 'Mariam Youssef',
-        patientMedicalCode: 'P-1002',
-        doctorBranchId: '33333333-3333-3333-3333-333333333333',
-        doctorName: this.doctorName(),
-        appointmentDate: new Date().toISOString().split('T')[0],
-        queueNumber: 2,
-        appointmentStatus: 1, // Waiting
-        notes: 'Seasonal allergy checkup'
-      },
-      {
-        id: '66666666-6666-6666-6666-666666666666',
-        patientId: '77777777-7777-7777-7777-777777777777',
-        patientName: 'Khaled Mostafa',
-        patientMedicalCode: 'P-1003',
-        doctorBranchId: '33333333-3333-3333-3333-333333333333',
-        doctorName: this.doctorName(),
-        appointmentDate: new Date().toISOString().split('T')[0],
-        queueNumber: 3,
-        appointmentStatus: 3, // Completed
-        notes: 'Blood pressure review'
+      error: () => {
+        this.todayQueue.set([]);
+        this.loading.set(false);
       }
-    ];
-    this.todayQueue.set(sample);
-    this.loading.set(false);
+    });
   }
 
   startVisit(appointmentId: string): void {
