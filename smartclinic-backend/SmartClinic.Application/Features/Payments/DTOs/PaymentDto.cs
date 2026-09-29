@@ -15,5 +15,7 @@ namespace SmartClinic.Application.Features.Payments.DTOs
         public string? ReceiptNumber { get; set; }
         public Guid CreatedByUserId { get; set; }
         public string? CreatedByUserName { get; set; }
+        public string? PatientName { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

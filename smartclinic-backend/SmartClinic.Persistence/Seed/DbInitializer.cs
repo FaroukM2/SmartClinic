@@ -26,7 +26,7 @@ public static class DbInitializer
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[DbInitializer Warning] Migration check: {ex.Message}");
+            Console.WriteLine($"[DbInitializer Warning] Migration check failed: {ex}");
         }
 
         // 1. Ensure Clinic exists

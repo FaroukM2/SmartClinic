@@ -37,5 +37,17 @@ namespace SmartClinic.Persistence.Repositories
                          && p.CreatedAt.Date == todayUtc)
                 .SumAsync(p => (decimal?)p.NetAmount, cancellationToken) ?? 0m;
         }
+
+        public async Task<System.Collections.Generic.IReadOnlyList<Payment>> GetPaymentsByClinicIdAsync(Guid clinicId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Payments
+                .Include(p => p.CreatedByUser)
+                .Include(p => p.Visit)
+                    .ThenInclude(v => v.Appointment)
+                        .ThenInclude(a => a.Patient)
+                .Where(p => p.Visit.Appointment.DoctorBranch.Branch.ClinicId == clinicId)
+                .OrderByDescending(p => p.CreatedAt)
+                .ToListAsync(cancellationToken);
+        }
     }
 }

@@ -94,6 +94,10 @@ public class Program
 
             app.Run();
         }
+        catch (Exception ex) when (ex.GetType().Name == "HostAbortedException")
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             Console.ForegroundColor = ConsoleColor.Red;

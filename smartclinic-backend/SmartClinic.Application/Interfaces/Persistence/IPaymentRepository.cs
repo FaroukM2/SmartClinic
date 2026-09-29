@@ -10,5 +10,6 @@ namespace SmartClinic.Application.Interfaces.Persistence
         Task AddPaymentAsync(Payment payment, CancellationToken cancellationToken = default);
         Task<Payment?> GetPaymentByVisitIdAsync(Guid visitId, CancellationToken cancellationToken = default);
         Task<decimal> GetTodayRevenueAsync(Guid clinicId, CancellationToken cancellationToken = default);
+        Task<System.Collections.Generic.IReadOnlyList<Payment>> GetPaymentsByClinicIdAsync(Guid clinicId, CancellationToken cancellationToken = default);
     }
 }

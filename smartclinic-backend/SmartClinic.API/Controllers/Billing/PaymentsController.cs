@@ -42,4 +42,11 @@ public class PaymentsController : ControllerBase
         var payment = await _mediator.Send(new GetPaymentByVisitIdQuery(visitId));
         return payment is null ? NotFound() : Ok(payment);
     }
+
+    [HttpGet("clinic/{clinicId:guid}")]
+    public async Task<IActionResult> GetByClinicId(Guid clinicId)
+    {
+        var payments = await _mediator.Send(new SmartClinic.Application.Features.Payments.Queries.GetPaymentsByClinicId.GetPaymentsByClinicIdQuery(clinicId));
+        return Ok(payments);
+    }
 }

@@ -39,19 +39,24 @@ export interface PrescriptionItem {
 export interface Payment {
   id: string;
   visitId: string;
-  totalAmount: number;
-  discountAmount: number;
+  amount: number;
+  totalAmount?: number;
+  discount: number;
+  discountAmount?: number;
   netAmount: number;
   paymentMethod: number;
   paymentMethodLabel?: string;
-  receiptNumber: string;
+  receiptNumber?: string;
+  createdByUserId?: string;
+  createdByUserName?: string;
+  patientName?: string;
   notes?: string;
-  paidAt: string;
+  createdAt?: string;
+  paidAt?: string;
 }
 
 export const PaymentMethodLabels: Record<number, string> = {
-  0: 'Cash',
-  1: 'Credit Card',
-  2: 'Bank Transfer',
+  1: 'Cash',
+  2: 'Credit Card',
   3: 'Insurance'
 };

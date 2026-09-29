@@ -78,4 +78,8 @@ export class ClinicService {
   getPaymentByVisitId(visitId: string): Observable<Payment> {
     return this.http.get<Payment>(`${environment.apiUrl}/Payments/visit/${visitId}`);
   }
+
+  getPaymentsByClinic(clinicId: string): Observable<Payment[]> {
+    return this.http.get<Payment[]>(`${environment.apiUrl}/Payments/clinic/${clinicId}`);
+  }
 }
