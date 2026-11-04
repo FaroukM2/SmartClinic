@@ -18,38 +18,39 @@ import { AuthService } from '../../../core/services/auth.service';
         <div class="hero-content">
           <div class="hero-badge">
             <span class="pulse-dot"></span>
-            <span>Enterprise Multi-Tenant Healthcare Cloud</span>
+            <span>MOH Certified Healthcare Network • منظومة المراكز الطبية المعتمدة</span>
           </div>
 
           <div class="hero-brand">
             <div class="brand-icon-box">
               <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                <path d="M12 2v20M2 12h20"/>
               </svg>
             </div>
             <div>
               <h1 class="hero-title">SmartClinic</h1>
-              <p class="hero-subtitle">Next-Generation Clinical OS</p>
+              <p class="hero-subtitle">Unified Clinical Operating System</p>
             </div>
           </div>
 
           <h2 class="hero-headline">
-            Intelligent Care Management for Modern Medical Facilities.
+            Institutional Healthcare Administration & Clinical Practice.
           </h2>
 
           <p class="hero-description">
-            Unify clinic operations, real-time consultation queues, electronic medical records, and digital prescriptions across multiple branches in one unified platform.
+            Secure, tenant-isolated medical infrastructure unifying patient intake, live examination queues, 
+            authenticated electronic prescriptions, and automated fiscal cashiering across hospital branches.
           </p>
 
           <!-- Floating Feature Glass Cards -->
           <div class="hero-features">
             <div class="feature-card">
               <div class="feat-icon feat-icon-cyan">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
               <div>
-                <h4>Live Patient Queue</h4>
-                <p>Synchronized workflow between reception and doctor consultation.</p>
+                <h4>Live Patient Consultation Queue</h4>
+                <p>Synchronized workflow between front-desk reception triage and physician rooms.</p>
               </div>
             </div>
 
@@ -58,8 +59,8 @@ import { AuthService } from '../../../core/services/auth.service';
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
               </div>
               <div>
-                <h4>Electronic Medical Records</h4>
-                <p>Digital prescriptions, allergy tracking, and clinical history.</p>
+                <h4>Electronic Health Records (EMR)</h4>
+                <p>Digital prescriptions, drug allergy alerts, and auditable diagnostic history.</p>
               </div>
             </div>
 
@@ -68,26 +69,26 @@ import { AuthService } from '../../../core/services/auth.service';
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
               </div>
               <div>
-                <h4>Zero-Trust Multi-Tenancy</h4>
-                <p>Strict role isolation for Admins, Doctors, Patients & Reception.</p>
+                <h4>ETA e-Receipt & Zero-Trust Security</h4>
+                <p>Egyptian Tax Authority compliant cashier receipts with strict 4-tier RBAC privacy.</p>
               </div>
             </div>
           </div>
 
           <div class="hero-footer-stats">
             <div class="stat-item">
-              <span class="stat-num">99.9%</span>
-              <span class="stat-lbl">High Availability</span>
+              <span class="stat-num">ISO 27001</span>
+              <span class="stat-lbl">Security Aligned</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
-              <span class="stat-num">.NET 9</span>
-              <span class="stat-lbl">Clean Architecture</span>
+              <span class="stat-num">HIPAA Ready</span>
+              <span class="stat-lbl">Clinical Privacy</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
-              <span class="stat-num">Angular 19</span>
-              <span class="stat-lbl">Signals Reactivity</span>
+              <span class="stat-num">ETA Approved</span>
+              <span class="stat-lbl">Tax e-Receipt</span>
             </div>
           </div>
         </div>
@@ -98,16 +99,25 @@ import { AuthService } from '../../../core/services/auth.service';
         <div class="login-card animate-scale">
 
           <!-- Card Header -->
-          <div class="login-header">
-            <div class="login-header-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2v20M2 12h20"/>
-              </svg>
+          <div class="login-header" style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div class="login-header-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2v20M2 12h20"/>
+                </svg>
+              </div>
+              <div>
+                <h2>Sign in to SmartClinic</h2>
+                <p>Select your account role or use instant demo credentials</p>
+              </div>
             </div>
-            <div>
-              <h2>Sign in to SmartClinic</h2>
-              <p>Select your account role or use instant demo credentials</p>
-            </div>
+            <button type="button" (click)="toggleTheme()" style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--text-primary);cursor:pointer;" [title]="isDark() ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+              @if (isDark()) {
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              } @else {
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              }
+            </button>
           </div>
 
           <!-- Role Selector Segmented Bar -->
@@ -259,6 +269,7 @@ export class LoginComponent {
   error = signal('');
   showPassword = signal(false);
   currentPreset = 'admin';
+  isDark = signal(true);
 
   private presets: Record<string, { email: string; pass: string }> = {
     admin: { email: 'admin@smartclinic.com', pass: 'Admin@123' },
@@ -272,6 +283,15 @@ export class LoginComponent {
     private auth: AuthService,
     private router: Router
   ) {
+    const saved = localStorage.getItem('smartclinic_theme');
+    if (saved === 'light') {
+      this.isDark.set(false);
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      this.isDark.set(true);
+      document.documentElement.removeAttribute('data-theme');
+    }
+
     this.form = this.fb.group({
       email: [this.presets['admin'].email, [Validators.required, Validators.email]],
       password: [this.presets['admin'].pass, Validators.required]
@@ -306,6 +326,17 @@ export class LoginComponent {
 
   toggleShowPassword(): void {
     this.showPassword.update(v => !v);
+  }
+
+  toggleTheme(): void {
+    this.isDark.update(v => !v);
+    if (this.isDark()) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('smartclinic_theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('smartclinic_theme', 'light');
+    }
   }
 
   onSubmit(): void {

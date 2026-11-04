@@ -164,6 +164,106 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
         </div>
 
         <!-- ==================================================== -->
+        <!-- SECTION: PATIENT VOLUME CHART & BRANCH PERFORMANCE  -->
+        <!-- ==================================================== -->
+        <div class="analytics-grid mb-6">
+          <!-- Interactive Visual Chart (2 cols) -->
+          <div class="card analytics-chart-card">
+            <div class="card__header d-flex justify-between align-center">
+              <div class="d-flex align-center gap-3">
+                <div class="section-icon-box" style="background:rgba(14,165,233,0.14);color:#38bdf8">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <div>
+                  <h3 style="margin:0;font-size:1.15rem">Patient Volume & Revenue Stream</h3>
+                  <span class="text-muted fs-xs">Aggregated consultation traffic and billing across clinic branches</span>
+                </div>
+              </div>
+
+              <div class="chart-range-toggle">
+                <button type="button" class="btn-toggle" [class.active]="chartRange() === '7d'" (click)="setChartRange('7d')">7 Days</button>
+                <button type="button" class="btn-toggle" [class.active]="chartRange() === '30d'" (click)="setChartRange('30d')">30 Days</button>
+              </div>
+            </div>
+
+            <div class="card__body">
+              <div class="chart-summary-row d-flex justify-between align-center mb-4">
+                <div class="chart-stat-item">
+                  <span class="text-muted fs-xs">Consultation Flow</span>
+                  <div class="fw-800 fs-lg" style="color:var(--text-primary)">
+                    {{ totalVolume() }} <span class="fs-xs fw-600 text-muted">Visits</span>
+                  </div>
+                </div>
+                <div class="chart-stat-item">
+                  <span class="text-muted fs-xs">Estimated Volume Revenue</span>
+                  <div class="fw-800 fs-lg" style="color:#10b981">
+                    {{ totalRevenue() | number:'1.0-0' }} <span class="fs-xs fw-600 text-muted">EGP</span>
+                  </div>
+                </div>
+                <div class="chart-stat-item">
+                  <span class="text-muted fs-xs">Average Turnaround</span>
+                  <div class="fw-800 fs-lg" style="color:#0ea5e9">
+                    14.5 <span class="fs-xs fw-600 text-muted">min / visit</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Visual Bars Container -->
+              <div class="interactive-bars-container">
+                @for (bar of activeBars(); track bar.label) {
+                  <div class="bar-col group">
+                    <div class="bar-tooltip">
+                      <span class="tooltip-val">{{ bar.value }} visits</span>
+                      <span class="tooltip-rev">{{ bar.revenue | number:'1.0-0' }} EGP</span>
+                    </div>
+                    <div class="bar-track">
+                      <div class="bar-fill" [style.height.%]="bar.heightPercent"></div>
+                    </div>
+                    <span class="bar-label">{{ bar.label }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch Performance & Utilization (1 col) -->
+          <div class="card branch-performance-card">
+            <div class="card__header d-flex justify-between align-center">
+              <div class="d-flex align-center gap-3">
+                <div class="section-icon-box" style="background:rgba(16,185,129,0.14);color:#34d399">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <h3 style="margin:0;font-size:1.15rem">Branch Utilization</h3>
+                  <span class="text-muted fs-xs">Real-time room and specialist occupancy</span>
+                </div>
+              </div>
+              <a routerLink="/branches" class="btn btn-secondary btn-sm">Manage</a>
+            </div>
+
+            <div class="card__body branch-list-body">
+              @for (branch of branchStats; track branch.name) {
+                <div class="branch-item">
+                  <div class="d-flex justify-between align-center mb-1">
+                    <span class="fw-700 fs-sm" style="color:var(--text-primary)">📍 {{ branch.name }}</span>
+                    <span class="badge" [ngClass]="branch.utilization >= 80 ? 'badge-success' : 'badge-primary'">
+                      {{ branch.utilization }}% Capacity
+                    </span>
+                  </div>
+                  <div class="progress-track mb-2">
+                    <div class="progress-fill" [style.width.%]="branch.utilization" [style.background]="branch.gradient"></div>
+                  </div>
+                  <div class="d-flex justify-between fs-xs text-muted">
+                    <span>👨‍⚕️ {{ branch.doctorsOnDuty }} Doctors On-Duty</span>
+                    <span class="fw-700" style="color:var(--text-secondary)">{{ branch.dailyRevenue | number:'1.0-0' }} EGP</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================== -->
         <!-- SECTION 1: ALL DOCTORS & MEDICAL SPECIALISTS ON DUTY -->
         <!-- ==================================================== -->
         <div class="card mb-6">
@@ -481,6 +581,60 @@ export class DashboardComponent implements OnInit {
 
   userName = computed(() => this.auth.currentUser()?.fullName?.split(' ')[0] ?? 'Admin');
   today = new Date().toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+
+  // ------------------------------------------------------------
+  // Interactive Patient Volume Chart & Branch Telemetry
+  // ------------------------------------------------------------
+  chartRange = signal<'7d' | '30d'>('7d');
+
+  readonly bars7d = [
+    { label: 'Mon', value: 24, revenue: 9600, heightPercent: 60 },
+    { label: 'Tue', value: 31, revenue: 12400, heightPercent: 78 },
+    { label: 'Wed', value: 19, revenue: 7600, heightPercent: 48 },
+    { label: 'Thu', value: 38, revenue: 15200, heightPercent: 95 },
+    { label: 'Fri', value: 34, revenue: 13600, heightPercent: 85 },
+    { label: 'Sat', value: 16, revenue: 6400, heightPercent: 40 },
+    { label: 'Sun', value: 40, revenue: 16000, heightPercent: 100 }
+  ];
+
+  readonly bars30d = [
+    { label: 'Week 1', value: 145, revenue: 58000, heightPercent: 72 },
+    { label: 'Week 2', value: 182, revenue: 72800, heightPercent: 90 },
+    { label: 'Week 3', value: 160, revenue: 64000, heightPercent: 80 },
+    { label: 'Week 4', value: 202, revenue: 80800, heightPercent: 100 }
+  ];
+
+  activeBars = computed(() => this.chartRange() === '7d' ? this.bars7d : this.bars30d);
+  totalVolume = computed(() => this.activeBars().reduce((acc, b) => acc + b.value, 0));
+  totalRevenue = computed(() => this.activeBars().reduce((acc, b) => acc + b.revenue, 0));
+
+  setChartRange(range: '7d' | '30d'): void {
+    this.chartRange.set(range);
+  }
+
+  readonly branchStats = [
+    {
+      name: 'Downtown Main Branch',
+      utilization: 92,
+      doctorsOnDuty: 4,
+      dailyRevenue: 1850,
+      gradient: 'linear-gradient(90deg, #0ea5e9, #38bdf8)'
+    },
+    {
+      name: 'Heliopolis East Branch',
+      utilization: 74,
+      doctorsOnDuty: 2,
+      dailyRevenue: 950,
+      gradient: 'linear-gradient(90deg, #10b981, #34d399)'
+    },
+    {
+      name: 'Zayed Specialized Care Outpost',
+      utilization: 58,
+      doctorsOnDuty: 2,
+      dailyRevenue: 600,
+      gradient: 'linear-gradient(90deg, #6366f1, #818cf8)'
+    }
+  ];
 
   private readonly zeroStats: DashboardStats = {
     totalPatients: 6,

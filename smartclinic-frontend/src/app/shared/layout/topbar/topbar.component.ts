@@ -100,15 +100,24 @@ export class TopbarComponent {
   });
 
   constructor() {
-    document.documentElement.removeAttribute('data-theme');
+    const saved = localStorage.getItem('smartclinic_theme');
+    if (saved === 'light') {
+      this.isDark.set(false);
+      document.documentElement.setAttribute('data-theme', 'light');
+    } else {
+      this.isDark.set(true);
+      document.documentElement.removeAttribute('data-theme');
+    }
   }
 
   toggleTheme(): void {
     this.isDark.update(v => !v);
     if (this.isDark()) {
       document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('smartclinic_theme', 'dark');
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('smartclinic_theme', 'light');
     }
   }
 

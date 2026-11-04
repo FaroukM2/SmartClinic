@@ -10,5 +10,5 @@ namespace SmartClinic.Application.Features.Doctors.Commands.AssignDoctorToBranch
         decimal FollowUpFee,
         int FollowUpDaysLimit,
         int SlotDurationMinutes
-    ) : IRequest<bool>;
+    ) : IRequest<Guid>;
 }

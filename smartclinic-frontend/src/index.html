@@ -2,13 +2,93 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>SmartClinic — Medical Management System</title>
-  <meta name="description" content="SmartClinic — A comprehensive medical clinic management system for appointments, patients, doctors, and billing.">
+  <title>SmartClinic — Enterprise Multi-Tenant Smart Clinic & Healthcare Platform</title>
+  <meta name="description" content="Enterprise Multi-Tenant Smart Clinic Management System built with .NET 9 Clean Architecture & Angular 19. Features live waiting queues, EMR electronic records, digital prescriptions, and branch billing.">
+  <meta name="keywords" content="smart clinic, clinic management system, multi-tenant healthcare, EMR system, medical appointments, digital prescription, نظام إدارة العيادات, الملف الطبي الإلكتروني">
+  <meta name="author" content="SmartClinic Healthcare Technology">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+  <!-- Open Graph / Facebook / LinkedIn Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SmartClinic — Enterprise Healthcare Operating System">
+  <meta property="og:description" content="Streamline poly-clinic operations with multi-tenant data isolation, live patient queue telemetry, and automated clinical prescriptions.">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_EG">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SmartClinic — Enterprise Medical Platform">
+  <meta name="twitter:description" content="Clean Architecture .NET 9 + Angular 19 Multi-Tenant Clinic Management System.">
+
+  <!-- Google Fonts: English & Arabic Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Schema.org JSON-LD Structured Data for Medical SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://smartclinic.com/#software",
+        "name": "SmartClinic Healthcare OS",
+        "applicationCategory": "HealthCareApplication",
+        "operatingSystem": "Web Cloud SaaS",
+        "description": "Multi-tenant clinical platform providing Electronic Medical Records (EMR), queue synchronization, and automated invoicing.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "MedicalClinic",
+        "@id": "https://smartclinic.com/#clinic",
+        "name": "SmartClinic Medical Centers Network",
+        "url": "http://localhost:4200",
+        "medicalSpecialty": [
+          "Cardiology",
+          "Pediatrics",
+          "Orthopedics",
+          "Dermatology"
+        ],
+        "availableService": [
+          {
+            "@type": "MedicalProcedure",
+            "name": "Clinical Specialty Consultation"
+          },
+          {
+            "@type": "MedicalProcedure",
+            "name": "Electronic Medical Records & Prescriptions"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Downtown Central Health District",
+          "addressLocality": "Cairo",
+          "addressCountry": "EG"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Early Theme Persistence Bootstrapper -->
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('smartclinic_theme');
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else if (savedTheme === 'dark') {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <app-root></app-root>

@@ -28,8 +28,8 @@ export class DoctorService {
     return this.http.get<Doctor[]>(`${this.base}/clinic/${clinicId}`);
   }
 
-  assignDoctorToBranch(req: DoctorBranch): Observable<void> {
-    return this.http.post<void>(`${this.base}/assign-branch`, req);
+  assignDoctorToBranch(req: DoctorBranch): Observable<string> {
+    return this.http.post<string>(`${this.base}/assign-branch`, req);
   }
 
   setDoctorSchedule(req: DoctorSchedule): Observable<void> {

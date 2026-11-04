@@ -43,7 +43,8 @@ namespace SmartClinic.Application.Features.Authentication.Commands.RegisterPatie
                 throw new InvalidOperationException("Email is already registered.");
 
             var targetClinicId = request.ClinicId;
-            if (targetClinicId == Guid.Empty)
+            var clinicExists = targetClinicId != Guid.Empty && await _clinicRepository.GetByIdAsync(targetClinicId, cancellationToken) != null;
+            if (!clinicExists)
             {
                 var clinics = await _clinicRepository.GetAllAsync(cancellationToken);
                 targetClinicId = clinics.FirstOrDefault()?.Id ?? throw new InvalidOperationException("No clinic available in the system.");

@@ -71,6 +71,11 @@ namespace SmartClinic.API.Middlewares
                     response.Message = exception.Message;
                     break;
 
+                case Microsoft.EntityFrameworkCore.DbUpdateException dbUpdateException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    response.Message = dbUpdateException.InnerException?.Message ?? dbUpdateException.Message;
+                    break;
+
                 default:
                     response.Message = exception.Message;
                     break;

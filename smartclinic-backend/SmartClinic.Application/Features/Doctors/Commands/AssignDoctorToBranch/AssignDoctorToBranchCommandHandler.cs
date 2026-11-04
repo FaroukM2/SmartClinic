@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartClinic.Application.Features.Doctors.Commands.AssignDoctorToBranch
 {
-    public class AssignDoctorToBranchCommandHandler : IRequestHandler<AssignDoctorToBranchCommand, bool>
+    public class AssignDoctorToBranchCommandHandler : IRequestHandler<AssignDoctorToBranchCommand, Guid>
     {
         private readonly IDoctorRepository _doctorRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -19,13 +19,14 @@ namespace SmartClinic.Application.Features.Doctors.Commands.AssignDoctorToBranch
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> Handle(AssignDoctorToBranchCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(AssignDoctorToBranchCommand request, CancellationToken cancellationToken)
         {
             var existingDoctorBranch = await _doctorRepository.GetDoctorBranchAsync(
                 request.DoctorId,
                 request.BranchId,
                 cancellationToken);
 
+            Guid resultId;
             if (existingDoctorBranch is not null)
             {
                 existingDoctorBranch.ConsultationFee = request.ConsultationFee;
@@ -35,6 +36,7 @@ namespace SmartClinic.Application.Features.Doctors.Commands.AssignDoctorToBranch
                 existingDoctorBranch.IsActive = true;
 
                 await _doctorRepository.UpdateDoctorBranchAsync(existingDoctorBranch, cancellationToken);
+                resultId = existingDoctorBranch.Id;
             }
             else
             {
@@ -50,10 +52,11 @@ namespace SmartClinic.Application.Features.Doctors.Commands.AssignDoctorToBranch
                 };
 
                 await _doctorRepository.AddDoctorBranchAsync(newDoctorBranch, cancellationToken);
+                resultId = newDoctorBranch.Id;
             }
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
-            return true;
+            return resultId;
         }
     }
 }

@@ -12,17 +12,20 @@ namespace SmartClinic.Application.Features.Authentication.Commands.Register
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, LoginResponse>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IClinicRepository _clinicRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IJwtProvider _jwtProvider;
         private readonly IUnitOfWork _unitOfWork;
 
         public RegisterUserCommandHandler(
             IUserRepository userRepository,
+            IClinicRepository clinicRepository,
             IPasswordHasher passwordHasher,
             IJwtProvider jwtProvider,
             IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
+            _clinicRepository = clinicRepository;
             _passwordHasher = passwordHasher;
             _jwtProvider = jwtProvider;
             _unitOfWork = unitOfWork;
@@ -34,10 +37,18 @@ namespace SmartClinic.Application.Features.Authentication.Commands.Register
             if (existingUser is not null)
                 throw new InvalidOperationException("Email is already registered.");
 
+            var targetClinicId = request.ClinicId;
+            var clinicExists = targetClinicId != Guid.Empty && await _clinicRepository.GetByIdAsync(targetClinicId, cancellationToken) != null;
+            if (!clinicExists)
+            {
+                var clinics = await _clinicRepository.GetAllAsync(cancellationToken);
+                targetClinicId = clinics.FirstOrDefault()?.Id ?? throw new InvalidOperationException("No clinic available in the system.");
+            }
+
             var passwordHash = _passwordHasher.Hash(request.Password);
             var user = new User
             {
-                ClinicId = request.ClinicId,
+                ClinicId = targetClinicId,
                 FullName = request.FullName,
                 Email = request.Email,
                 PasswordHash = passwordHash,

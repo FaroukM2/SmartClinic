@@ -24,6 +24,7 @@ namespace SmartClinic.Application.Features.Doctors.DTOs
     public class DoctorBranchDto
     {
         public Guid Id { get; set; }
+        public Guid DoctorBranchId => Id;
         public Guid DoctorId { get; set; }
         public Guid BranchId { get; set; }
         public string BranchName { get; set; } = null!;

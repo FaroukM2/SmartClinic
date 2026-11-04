@@ -4,6 +4,10 @@ import { roleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
   {
+    path: 'welcome',
+    loadComponent: () => import('./features/public/landing-page/landing-page.component').then(m => m.LandingPageComponent)
+  },
+  {
     path: 'login',
     loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
   },
@@ -75,5 +79,5 @@ export const routes: Routes = [
       },
     ]
   },
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/welcome' }
 ];

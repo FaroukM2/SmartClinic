@@ -35,8 +35,8 @@ public class DoctorsController : ControllerBase
     [HttpPost("assign-branch")]
     public async Task<IActionResult> AssignToBranch([FromBody] AssignDoctorToBranchCommand command)
     {
-        var success = await _mediator.Send(command);
-        return success ? Ok() : BadRequest();
+        var doctorBranchId = await _mediator.Send(command);
+        return Ok(doctorBranchId);
     }
 
     [Authorize(Roles = "ClinicAdmin,PlatformAdmin")]

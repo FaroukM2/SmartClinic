@@ -495,3 +495,144 @@
 
   svg { color: #10b981; }
 }
+
+// ============================================================
+// CLINICAL LIGHT THEME & ENTERPRISE POLISH FOR LOGIN
+// ============================================================
+:host-context([data-theme="light"]) {
+  .auth-wrapper {
+    background: #f8fafc;
+  }
+
+  .auth-hero {
+    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #f8fafc 100%);
+    border-right-color: #e2e8f0;
+
+    .hero-glow-1, .hero-glow-2 {
+      display: none;
+    }
+
+    .hero-badge {
+      background: rgba(2, 132, 199, 0.08);
+      border-color: rgba(2, 132, 199, 0.2);
+      color: #0284c7;
+    }
+
+    .hero-title {
+      background: none;
+      -webkit-text-fill-color: initial;
+      color: #0f172a;
+    }
+
+    .hero-subtitle {
+      color: #0284c7;
+    }
+
+    .hero-headline {
+      color: #0f172a;
+    }
+
+    .hero-description {
+      color: #475569;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      border-color: #e2e8f0;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+
+      &:hover {
+        background: #ffffff;
+        border-color: rgba(2, 132, 199, 0.35);
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      }
+
+      h4 { color: #0f172a; }
+      p { color: #64748b; }
+    }
+
+    .hero-footer-stats {
+      border-top-color: #e2e8f0;
+
+      .stat-num { color: #0f172a; }
+      .stat-lbl { color: #64748b; }
+      .stat-divider { background: #e2e8f0; }
+    }
+  }
+
+  .auth-form-panel {
+    background: #ffffff;
+  }
+
+  .login-card {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 12px 36px -4px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+
+    .login-header h2 { color: #0f172a; }
+    .login-header p { color: #64748b; }
+
+    .role-segmented-box {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+    }
+
+    .role-tab {
+      color: #475569;
+      &:hover { color: #0f172a; }
+      &.active {
+        background: #0284c7;
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+      }
+    }
+
+    .role-desc-chip {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+      color: #0369a1;
+      .role-dot { background: #0284c7; box-shadow: none; }
+    }
+
+    .form-group label {
+      color: #334155;
+    }
+
+    .input-container .form-control {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #0f172a;
+
+      &:focus {
+        background: #ffffff;
+        border-color: #0284c7;
+        box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+      }
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+
+      &:hover {
+        background: linear-gradient(135deg, #0369a1, #075985);
+        box-shadow: 0 6px 18px rgba(2, 132, 199, 0.4);
+      }
+    }
+
+    .register-prompt-box {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+      color: #475569;
+
+      .link-glow {
+        color: #0284c7;
+        &:hover { color: #0369a1; }
+      }
+    }
+
+    .security-chip {
+      color: #64748b;
+    }
+  }
+}
